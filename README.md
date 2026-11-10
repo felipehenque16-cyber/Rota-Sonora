@@ -1,30 +1,38 @@
 # Trilhê — sua trilha de viagem
 
-O Trilhê é uma experiência para criar uma trilha sonora que acompanhe o tempo de uma viagem.
+O Trilhê cria uma trilha sonora para acompanhar o tempo de uma viagem. A primeira versão será integrada exclusivamente ao **YouTube Music**, usando a conta Google autorizada pelo próprio usuário.
 
-## Estrutura
-- `index.html`: página inicial e escolha do serviço de música.
+## Experiência
+1. A pessoa conecta sua conta Google.
+2. Informa o ponto de partida e o destino.
+3. O Trilhê calcula a duração do trajeto.
+4. O sistema seleciona vídeos musicais e cria uma playlist na conta YouTube da pessoa, que poderá ser acessada pelo YouTube Music.
+
+## Estrutura atual
+- `index.html`: página inicial.
 - `travel.html`: formulário de origem e destino.
 - `css/style.css`: estilos responsivos.
 - `js/`: interações do navegador.
 
-## Revisão aplicada
-- Identidade e textos atualizados para a marca Trilhê.
-- Corrigido o caminho da folha de estilos para `css/style.css`.
-- Links internos ajustados para caminhos relativos.
-- Formulário valida campos obrigatórios e impede origem e destino iguais.
-- Tratamento de respostas inesperadas e falhas de conexão com o servidor.
-- Link final da playlist validado para aceitar somente HTTPS e domínios oficiais do serviço escolhido.
+## Integração com YouTube Music
 
-## Backend ainda necessário
-Este repositório contém o frontend. Para conectar contas e criar playlists de verdade, ainda é necessário implementar e publicar estas rotas:
-- `GET /api/auth?provider=spotify|youtube`: inicia o OAuth do serviço escolhido.
-- `POST /api/travel`: recebe `{ "provider", "partida", "chegada" }` e calcula a rota/duração.
-- `POST /api/create-playlist`: cria a playlist e devolve `{ "playlist_url": "https://..." }`.
+Não existe uma API pública independente do YouTube Music para todas as funções de biblioteca. A integração será feita pela **YouTube Data API v3**, com OAuth 2.0 do Google. A API oficial permite criar playlists no canal autenticado e adicionar vídeos a elas. A disponibilidade de uma faixa dentro da experiência do YouTube Music depende do catálogo e das regras do próprio serviço.
 
-As credenciais OAuth devem ficar exclusivamente no servidor, em variáveis de ambiente. Nunca coloque `CLIENT_SECRET`, tokens ou chaves privadas no HTML ou JavaScript enviado ao navegador.
+Documentação:
+- [YouTube Data API — criar playlists](https://developers.google.com/youtube/data/guides/implementation/playlists)
+- [YouTube Data API — criar uma playlist](https://developers.google.com/youtube/data/reference/rest/v3/playlists/insert)
+- [YouTube Data API — adicionar vídeos à playlist](https://developers.google.com/youtube/data/reference/rest/v3/playlistItems/insert)
 
-**Atenção:** o YouTube Music não oferece uma API pública independente para todas as operações de biblioteca e playlist. A integração precisa respeitar as APIs oficiais do Google/YouTube e suas permissões.
+## Backend necessário
 
-## Publicação
-O frontend pode ser servido como arquivos estáticos. Os botões de login e criação de playlist só funcionarão quando o backend estiver implantado e configurado no mesmo domínio ou quando as URLs da API forem ajustadas.
+O repositório ainda precisa do backend para concluir a autenticação e a criação real das playlists. As próximas rotas serão:
+- `GET /api/auth`: inicia o OAuth do Google.
+- `GET /api/auth/callback`: recebe o retorno da autorização.
+- `POST /api/travel`: calcula a rota e sua duração.
+- `POST /api/create-playlist`: cria a playlist e adiciona os vídeos selecionados.
+
+As credenciais OAuth, chaves e tokens devem ficar exclusivamente no servidor, em variáveis de ambiente. Nunca coloque segredos no HTML ou JavaScript do navegador.
+
+## Configuração e publicação
+
+A integração exige um projeto no [Google Cloud Console](https://console.cloud.google.com/), a YouTube Data API v3 ativada e credenciais OAuth configuradas. O domínio publicado também precisará ser cadastrado nas origens e URLs de redirecionamento autorizadas do OAuth.

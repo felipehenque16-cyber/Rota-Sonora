@@ -1,55 +1,8 @@
 <!doctype html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#101812">
-    <title>Seu trajeto — Tripfy</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-</head>
-<body>
-    <main class="page-shell travel-shell">
-        <nav class="topbar" aria-label="Navegação principal">
-            <a class="brand" href="/" aria-label="Tripfy, início">
-                <span class="brand-mark" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none"><path d="M4 16.5h16M6.5 16.5l1-5.3a2 2 0 0 1 2-1.6h5a2 2 0 0 1 2 1.6l1 5.3M7 16.5v2m10-2v2M8 13h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="16.5" r="1" fill="currentColor"/><circle cx="16" cy="16.5" r="1" fill="currentColor"/></svg>
-                </span>
-                tripfy<span class="brand-period">.</span>
-            </a>
-            <a class="back-link" href="/">Voltar ao início</a>
-        </nav>
-
-        <section class="travel-layout" aria-labelledby="travel-title">
-            <div class="travel-intro">
-                <span class="eyebrow"><span class="eyebrow-line"></span> Só falta escolher o caminho</span>
-                <h1 id="travel-title">Para onde<br>vamos <span>hoje?</span></h1>
-                <p id="travel-description">Conte de onde você sai e para onde vai. A gente calcula o tempo e prepara uma playlist com as suas músicas favoritas.</p>
-                <div class="travel-assurance"><span class="assurance-icon">♫</span><span><strong>Seu gosto, seu ritmo.</strong><br>Uma playlist feita para a duração do trajeto.</span></div>
-            </div>
-
-            <div class="travel-card">
-                <div class="card-heading"><span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M6 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm12 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM4 16V8l2-4h12l2 4v8M4 11h16M7 8h.01M17 8h.01" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><h2 id="playlist-heading">Sua playlist</h2><p>Preencha os dois endereços</p></div></div>
-                <form id="form-travel">
-                    <label class="field-label" for="partida">Ponto de partida</label>
-                    <div class="input-wrap"><span class="input-marker marker-start" aria-hidden="true"></span><input id="partida" name="partida" type="text" placeholder="Ex.: Avenida Paulista, São Paulo" autocomplete="street-address" maxlength="200" required></div>
-                    <div class="route-connector" aria-hidden="true"></div>
-                    <label class="field-label" for="chegada">Destino</label>
-                    <div class="input-wrap"><span class="input-marker marker-end" aria-hidden="true"></span><input id="chegada" name="chegada" type="text" placeholder="Ex.: Santos, SP" autocomplete="off" maxlength="200" required></div>
-                    <p class="form-message" id="form-message" role="status" aria-live="polite" hidden></p>
-                    <button class="button button-primary button-submit" id="submit-travel" type="submit">
-                        <span class="button-label">Criar minha playlist</span>
-                        <span class="button-spinner" aria-hidden="true"></span>
-                        <svg class="button-arrow" aria-hidden="true" viewBox="0 0 20 20" fill="none"><path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </button>
-                </form>
-                <p class="card-footnote" id="provider-note"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none"><path d="M4 7V5a4 4 0 0 1 8 0v2m-9 0h10v7H3V7Z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Endereços enviados ao OpenStreetMap para calcular a rota.</span></p>
-            </div>
-        </section>
-        <footer class="footer"><span>Feito para deixar o caminho ainda melhor.</span><span class="footer-meta"><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">© OpenStreetMap</a><span>Tripfy <span class="brand-period">●</span></span></span></footer>
-    </main>
-    <script src="js/script_rota_viagem.js" defer></script>
-</body>
-</html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#101812"><title>Seu trajeto — Trilhê</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link href="./css/style.css" rel="stylesheet"></head>
+<body><main class="page-shell travel-shell"><nav class="topbar" aria-label="Navegação principal"><a class="brand" href="./index.html" aria-label="Trilhê, início"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 16.5h16M6.5 16.5l1-5.3a2 2 0 0 1 2-1.6h5a2 2 0 0 1 2 1.6l1 5.3M7 16.5v2m10-2v2M8 13h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="16.5" r="1" fill="currentColor"/><circle cx="16" cy="16.5" r="1" fill="currentColor"/></svg></span>trilhê<span class="brand-period">.</span></a><a class="back-link" href="./index.html">Voltar ao início</a></nav>
+<section class="travel-layout" aria-labelledby="travel-title"><div class="travel-intro"><span class="eyebrow"><span class="eyebrow-line"></span> Só falta escolher o caminho</span><h1 id="travel-title">Para onde<br>vamos <span>hoje?</span></h1><p id="travel-description">Conte de onde você sai e para onde vai. A gente calcula o tempo e prepara uma playlist com as suas músicas favoritas.</p><div class="travel-assurance"><span class="assurance-icon">♫</span><span><strong>Seu gosto, seu ritmo.</strong><br>Uma playlist feita para a duração do trajeto.</span></div></div>
+<div class="travel-card"><div class="card-heading"><span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M6 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm12 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM4 16V8l2-4h12l2 4v8M4 11h16M7 8h.01M17 8h.01" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><h2 id="playlist-heading">Sua playlist</h2><p>Preencha os dois endereços</p></div></div>
+<form id="form-travel"><label class="field-label" for="partida">Ponto de partida</label><div class="input-wrap"><span class="input-marker marker-start" aria-hidden="true"></span><input id="partida" name="partida" type="text" placeholder="Ex.: Avenida Paulista, São Paulo" autocomplete="street-address" maxlength="200" required></div><div class="route-connector" aria-hidden="true"></div><label class="field-label" for="chegada">Destino</label><div class="input-wrap"><span class="input-marker marker-end" aria-hidden="true"></span><input id="chegada" name="chegada" type="text" placeholder="Ex.: Santos, SP" autocomplete="off" maxlength="200" required></div><p class="form-message" id="form-message" role="status" aria-live="polite" hidden></p><button class="button button-primary button-submit" id="submit-travel" type="submit"><span class="button-label">Criar minha playlist</span><span class="button-spinner" aria-hidden="true"></span><svg class="button-arrow" aria-hidden="true" viewBox="0 0 20 20" fill="none"><path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></form>
+<p class="card-footnote" id="provider-note"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none"><path d="M4 7V5a4 4 0 0 1 8 0v2m-9 0h10v7H3V7Z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Endereços enviados ao OpenStreetMap para calcular a rota.</span></p></div></section>
+<footer class="footer"><span>Feito para deixar o caminho ainda melhor.</span><span class="footer-meta"><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">© OpenStreetMap</a><span>Trilhê <span class="brand-period">●</span></span></span></footer></main><script src="./js/script_rota_viagem.js" defer></script></body></html>

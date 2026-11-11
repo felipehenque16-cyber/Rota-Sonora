@@ -57,6 +57,66 @@ const lessons = [
   {heading:"O que vem depois",body:"Depois de conectar a conta, o backend poderá criar uma playlist com a YouTube Data API e adicionar vídeos. Isso não garante que toda faixa esteja disponível como música no YouTube Music: a disponibilidade depende do catálogo e das regras do serviço."}
  ],
  challenge:{question:"O Trilhê deve pedir a senha Google diretamente em um formulário próprio?",answer:"Não. A pessoa deve autenticar-se na página oficial do Google. O Trilhê recebe a autorização pelo fluxo OAuth."}
+},
+{
+ title:"HTML semântico: significado antes da aparência<span>.</span>",
+ intro:"HTML semântico é usar cada elemento pelo significado que ele tem. Isso deixa o código mais organizado, ajuda tecnologias assistivas e facilita a manutenção do projeto.",
+ sections:[
+  {heading:"Estrutura de uma página",code:'<header>Topo e identidade do site</header>\n<nav>Menu de navegação</nav>\n<main>\n  <section>\n    <h1>Minha viagem</h1>\n    <p>Planeje seu próximo destino.</p>\n  </section>\n</main>\n<footer>Informações finais</footer>',language:"HTML semântico",body:"Use header para o cabeçalho, nav para navegação, main para o conteúdo principal, section para agrupamentos e footer para o rodapé."},
+  {heading:"Boas práticas",cards:[["Um h1 principal","Organize títulos em níveis: h1, h2 e h3."],["Imagens com alt","Descreva imagens importantes para leitores de tela."],["Botões e links","Use button para ações e a para navegação."],["Labels","Associe cada campo de formulário a uma label."]]},
+  {heading:"Exemplo de campo acessível",code:'<label for="cidade">Sua cidade</label>\n<input id="cidade" name="cidade" type="text">',language:"HTML",body:"O for da label aponta para o id do input. Assim, clicar no texto também seleciona o campo e leitores de tela conseguem identificar sua finalidade."}
+ ],
+ challenge:{question:"Para criar o menu principal do site, qual elemento semântico é mais adequado?",answer:"A tag nav. Ela identifica uma área de navegação. Dentro dela, você pode colocar links para as páginas ou seções."}
+},
+{
+ title:"CSS e Box Model: entendendo os espaços<span>.</span>",
+ intro:"Todo elemento HTML é tratado como uma caixa. Entender o Box Model ajuda a controlar tamanho, bordas e espaçamentos sem ficar tentando valores aleatórios.",
+ sections:[
+  {heading:"As quatro partes da caixa",code:'.card {\n  width: 280px;\n  padding: 20px;\n  border: 1px solid #34513b;\n  margin: 16px;\n}',language:"CSS",body:"Content é o conteúdo. Padding é o espaço interno. Border é a borda. Margin é o espaço externo entre elementos."},
+  {heading:"Uma regra que facilita a vida",code:'* {\n  box-sizing: border-box;\n}',language:"CSS",body:"Com border-box, padding e border entram no cálculo da largura e altura definidas. Isso torna o dimensionamento mais previsível."},
+  {heading:"Experimente no Trilhê",body:"Abra css/style.css, encontre um cartão e teste aumentar o padding. Depois altere o margin. Observe como o espaço dentro do cartão é diferente do espaço entre cartões."}
+ ],
+ challenge:{question:"Qual propriedade cria espaço dentro de um elemento?",answer:"padding. Já margin cria espaço do lado de fora, separando o elemento dos outros."}
+},
+{
+ title:"Flexbox: alinhando elementos sem sofrimento<span>.</span>",
+ intro:"Flexbox é um sistema de layout CSS ótimo para organizar itens em uma dimensão: uma linha ou uma coluna. Ele é muito usado em menus, botões e grupos de conteúdo.",
+ sections:[
+  {heading:"Ativando o Flexbox",code:'.menu {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 16px;\n}',language:"CSS",body:"display:flex ativa o Flexbox. align-items alinha no eixo transversal. justify-content distribui os itens no eixo principal. gap define o espaço entre eles."},
+  {heading:"Direção dos itens",code:'.lista {\n  display: flex;\n  flex-direction: column;\n  gap: 12px;\n}',language:"CSS",body:"row organiza em linha (padrão). column organiza em coluna. Você pode combinar Flexbox com media queries para adaptar o layout."},
+  {heading:"Quando usar?",cards:[["Menu","Alinhar marca e links na mesma linha."],["Botões","Deixar botões lado a lado com espaçamento."],["Cabeçalho","Distribuir logo, navegação e ações."]]}
+ ],
+ challenge:{question:"Qual propriedade distribui os itens ao longo do eixo principal?",answer:"justify-content. Experimente center, space-between e flex-start para perceber a diferença."}
+},
+{
+ title:"CSS Grid: criando layouts em duas dimensões<span>.</span>",
+ intro:"Grid organiza elementos em linhas e colunas ao mesmo tempo. É ótimo para montar grades de cartões, áreas de conteúdo e layouts de página.",
+ sections:[
+  {heading:"Uma grade de três colunas",code:'.cards {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 20px;\n}',language:"CSS Grid",body:"repeat(3, 1fr) cria três colunas com a mesma fração do espaço disponível. gap define o intervalo entre linhas e colunas."},
+  {heading:"Grade que se adapta",code:'.cards {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));\n  gap: 16px;\n}',language:"CSS Grid responsivo",body:"auto-fit encaixa a quantidade de colunas que couber. minmax define que cada coluna terá no mínimo 220px e poderá crescer."},
+  {heading:"Flexbox ou Grid?",cards:[["Flexbox","Melhor para alinhar elementos em uma direção."],["Grid","Melhor para estruturar linhas e colunas juntas."]]}
+ ],
+ challenge:{question:"Você quer criar cartões em três colunas iguais. Qual propriedade deve configurar?",answer:"grid-template-columns: repeat(3, 1fr). Ela cria três colunas com larguras iguais."}
+},
+{
+ title:"Responsividade: do computador ao celular<span>.</span>",
+ intro:"Um site responsivo se adapta a diferentes tamanhos de tela. Não basta diminuir tudo: é preciso reorganizar o conteúdo para continuar confortável de usar.",
+ sections:[
+  {heading:"Media query",code:'.hero {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}\n\n@media (max-width: 760px) {\n  .hero {\n    grid-template-columns: 1fr;\n  }\n}',language:"CSS",body:"A primeira regra cria duas colunas. Quando a tela chega a 760px ou menos, a media query muda o layout para uma coluna."},
+  {heading:"Cuidados importantes",rows:[["Viewport","Inclua a meta viewport no HTML."],["Larguras flexíveis","Prefira %, fr, rem e max-width quando fizer sentido."],["Imagens","Use max-width: 100% e height: auto."],["Toque","Deixe botões e links com área confortável."],["Teste","Confira a página em telas estreitas e largas."]]},
+  {heading:"Teste rápido",code:'img {\n  max-width: 100%;\n  height: auto;\n}\n\n.container {\n  width: min(100% - 32px, 1120px);\n  margin-inline: auto;\n}',language:"CSS",body:"Essas regras evitam que imagens ultrapassem o contêiner e mantêm o conteúdo centralizado com uma largura máxima."}
+ ],
+ challenge:{question:"Qual recurso CSS permite aplicar estilos diferentes conforme a largura da tela?",answer:"@media. Exemplo: @media (max-width: 600px) { ... } aplica regras em telas de até 600 pixels."}
+},
+{
+ title:"DOM e interações: JavaScript no navegador<span>.</span>",
+ intro:"DOM é a representação da página que o JavaScript consegue acessar e modificar. Com ele, podemos responder a cliques, trocar textos, mostrar avisos e validar campos.",
+ sections:[
+  {heading:"Encontrando e alterando um elemento",code:'const titulo = document.querySelector("#titulo");\ntitulo.textContent = "Olá, Trilhê!";',language:"JavaScript",body:"querySelector encontra o primeiro elemento que combina com um seletor CSS. textContent altera o texto que aparece dentro dele."},
+  {heading:"Respondendo a um clique",code:'const botao = document.querySelector("#meu-botao");\n\nbotao.addEventListener("click", () => {\n  alert("Você clicou!");\n});',language:"JavaScript",body:"O evento click acontece quando a pessoa clica no botão. A função passada para addEventListener será executada nesse momento."},
+  {heading:"Lendo um campo",code:'const campo = document.querySelector("#nome");\nconst nome = campo.value.trim();\n\nif (nome === "") {\n  alert("Digite seu nome.");\n}',language:"JavaScript",body:"value lê o que foi digitado. trim remove espaços extras no começo e no fim. if verifica se o valor está vazio."}
+ ],
+ challenge:{question:"Qual propriedade você usa para ler o texto digitado em um input?",answer:"A propriedade value. Exemplo: const destino = document.querySelector('#destino').value;."}
 }
 ];
 
@@ -79,7 +139,7 @@ function codeBlock(code,language){
 }
 function renderLesson(){
  const lesson=lessons[currentLesson];
- let html='<span class="eyebrow">AULA '+String(currentLesson+1).padStart(2,"0")+' / 06</span><h1>'+lesson.title+'</h1><p class="intro">'+lesson.intro+'</p>';
+ let html='<span class="eyebrow">AULA '+String(currentLesson+1).padStart(2,"0")+' / '+String(lessons.length).padStart(2,'0')+'</span><h1>'+lesson.title+'</h1><p class="intro">'+lesson.intro+'</p>';
  lesson.sections.forEach(section=>{
   html+='<section class="content-section"><h2>'+section.heading+'</h2>';
   if(section.body) html+='<p>'+section.body+'</p>';

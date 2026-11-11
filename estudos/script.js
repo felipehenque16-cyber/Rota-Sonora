@@ -235,12 +235,12 @@ function escapeActivityText(value){return value.replaceAll("&","&amp;").replaceA
 function renderActivity(){
  const exercise=exercises[Number(exerciseSelect.value)];
  editorLanguage.textContent=exercise.language;
- const steps=exercise.steps.map(step=>"<li>"+step+"</li>").join("");
+ const steps=exercise.steps.map(step=>"<li>"+escapeActivityText(step)+"</li>").join("");
  activityGuide.innerHTML=
-  '<article class="activity-brief"><div class="activity-topline"><span class="activity-tag">'+exercise.level+'</span><span class="eyebrow">ATIVIDADE '+String(Number(exerciseSelect.value)+1).padStart(2,"0")+'/03</span></div><h3>'+exercise.title+'</h3><p>'+exercise.context+'</p><div class="activity-goal"><strong>O que você precisa alcançar</strong><br>'+exercise.objective+'</div></article>'+
-  '<article class="learning-note"><span class="eyebrow">ANTES DE COMEÇAR</span><h3>Entenda o conceito</h3><p>'+exercise.explanation+'</p></article>'+
+  '<article class="activity-brief"><div class="activity-topline"><span class="activity-tag">'+escapeActivityText(exercise.level)+'</span><span class="eyebrow">ATIVIDADE '+String(Number(exerciseSelect.value)+1).padStart(2,"0")+'/03</span></div><h3>'+escapeActivityText(exercise.title)+'</h3><p>'+escapeActivityText(exercise.context)+'</p><div class="activity-goal"><strong>O que você precisa alcançar</strong><br>'+escapeActivityText(exercise.objective)+'</div></article>'+
+  '<article class="learning-note"><span class="eyebrow">ANTES DE COMEÇAR</span><h3>Entenda o conceito</h3><p>'+escapeActivityText(exercise.explanation)+'</p></article>'+
   '<article class="activity-steps"><span class="eyebrow">PASSO A PASSO</span><h3>Como resolver</h3><ol>'+steps+'</ol></article>'+
-  '<article class="hint-box"><details><summary>Preciso de uma dica</summary><p>'+exercise.hints[0]+'</p></details><details class="solution-details"><summary>Quero uma segunda dica</summary><p>'+exercise.hints[1]+'</p></details><details class="solution-details"><summary>Ver trecho corrigido (tente antes!)</summary><pre><code>'+escapeActivityText(exercise.solution)+'</code></pre></details></article>';
+  '<article class="hint-box"><details><summary>Preciso de uma dica</summary><p>'+escapeActivityText(exercise.hints[0])+'</p></details><details class="solution-details"><summary>Quero uma segunda dica</summary><p>'+escapeActivityText(exercise.hints[1])+'</p></details><details class="solution-details"><summary>Ver trecho corrigido (tente antes!)</summary><pre><code>'+escapeActivityText(exercise.solution)+'</code></pre></details></article>';
  codeEditor.value=exercise.starter;
  exerciseFeedback.textContent="Leia a explicação, siga as etapas e experimente. Errar faz parte do aprendizado.";
  exerciseFeedback.className="exercise-feedback";

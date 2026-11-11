@@ -183,60 +183,82 @@ completeButton.addEventListener("click",()=>{
 });
 renderLesson();
 
-// Laboratório de código: exercícios com correção e prévia isolada.
+// Prática guiada: cada atividade ensina o conceito antes de pedir a solução.
 const exercises = [
  {
-  instruction:"O título não foi fechado. Complete a tag para organizar corretamente a página.",
-  starter:'<!doctype html>\n<html lang="pt-BR">\n<body>\n  <h1>Minha primeira página\n  <p>Estou aprendendo HTML.</p>\n</body>\n</html>',
-  checks:[{test:/<h1>[^<]*<\/h1>/i,message:"Feche a tag h1 com </h1>."}],
-  success:"Boa! Você corrigiu a estrutura do HTML. O título agora está fechado corretamente."
+  language:"HTML",level:"Começando · 10 minutos",title:"Monte o conteúdo de um cartão de apresentação",
+  context:"Imagine que você está criando a página inicial de um site pessoal. Ela precisa mostrar um título e uma frase de apresentação. O navegador já recebe o texto, mas a estrutura do título está incompleta.",
+  objective:"A página deve mostrar o título “Olá, eu sou estudante de programação” e abaixo dele a frase “Estou aprendendo a criar sites.”",
+  explanation:"HTML organiza o conteúdo. As tags normalmente aparecem em pares: uma tag de abertura, como <h1>, e uma tag de fechamento, como </h1>. A barra / indica que o elemento está sendo encerrado. O h1 representa o título principal; o p representa um parágrafo.",
+  steps:["Localize a linha que começa com <h1>.","Observe que o texto do título começa, mas a tag não foi encerrada.","Depois do texto do título, escreva </h1>.","Confira se o parágrafo continua dentro da tag <p> e se ela também tem fechamento.","Clique em “Ver resultado” e depois em “Conferir minha solução”."],
+  starter:'<!doctype html>\n<html lang="pt-BR">\n<body>\n  <main>\n    <h1>Olá, eu sou estudante de programação\n    <p>Estou aprendendo a criar sites.</p>\n  </main>\n</body>\n</html>',
+  hints:["Uma tag de fechamento começa com os sinais </ e termina com >.","O título aberto é h1. A tag de fechamento correspondente é </h1>. Ela deve vir depois do texto do título."],
+  solution:'<h1>Olá, eu sou estudante de programação</h1>',
+  validate:code=>/<h1>\s*Olá, eu sou estudante de programação\s*<\/h1>/i.test(code)&&/<p>\s*Estou aprendendo a criar sites\.\s*<\/p>/i.test(code),
+  success:"Você corrigiu a estrutura! O navegador agora reconhece o título e o parágrafo como elementos separados.",
+  error:"Confira se o h1 tem abertura e fechamento e se o texto do parágrafo continua dentro de <p>."
  },
  {
-  instruction:"O nome da propriedade CSS está escrito errado. Corrija para que o cartão fique verde.",
-  starter:'<!doctype html>\n<html lang="pt-BR">\n<head>\n<style>\n.card {\n  backgroud: #c4f46b;\n  color: #172010;\n  padding: 24px;\n  border-radius: 12px;\n}\n</style>\n</head>\n<body>\n  <div class="card">Meu primeiro cartão</div>\n</body>\n</html>',
-  checks:[{test:/background\s*:\s*#c4f46b/i,message:"Confira a propriedade background e o valor #c4f46b."},{test:/backgroud\s*:/i,invert:true,message:"Ainda existe a palavra backgroud escrita incorretamente."}],
-  success:"Muito bem! Você encontrou e corrigiu o erro de CSS. O cartão já pode receber a cor de fundo."
+  language:"CSS",level:"Próximo passo · 12 minutos",title:"Dê estilo ao cartão de apresentação",
+  context:"O conteúdo existe, mas o cartão deveria ter fundo verde, texto escuro e espaço interno. Uma propriedade CSS foi digitada com erro.",
+  objective:"O cartão deve aparecer com fundo verde-limão, texto escuro e cantos arredondados. Corrija o nome da propriedade responsável pela cor de fundo.",
+  explanation:"CSS controla a aparência. Uma regra tem um seletor e um bloco de declarações. Em .cartao, o ponto seleciona uma classe. background define o fundo, color define a cor do texto, padding cria espaço interno e border-radius arredonda os cantos. Cada declaração usa propriedade: valor;.",
+  steps:["Encontre a regra .cartao dentro da tag <style>.","Leia o nome da propriedade antes dos dois-pontos na primeira declaração.","A propriedade correta para a cor de fundo é background.","Corrija apenas o nome escrito errado, sem apagar os outros estilos.","Clique em “Ver resultado” e observe o cartão. Depois confira sua solução."],
+  starter:'<!doctype html>\n<html lang="pt-BR">\n<head>\n<style>\n.cartao {\n  backgroud: #c4f46b;\n  color: #172010;\n  padding: 24px;\n  border-radius: 12px;\n}\n</style>\n</head>\n<body>\n  <div class="cartao">\n    <h1>Meu primeiro cartão</h1>\n    <p>Estou aprendendo CSS na prática.</p>\n  </div>\n</body>\n</html>',
+  hints:["O navegador ignora propriedades CSS que não reconhece. Por isso, o fundo continua sem a cor esperada.","Compare backgroud com background. Repare na posição das letras n e d."],
+  solution:'background: #c4f46b;',
+  validate:code=>/background\s*:\s*#c4f46b\s*;/i.test(code)&&!/backgroud\s*:/i.test(code),
+  success:"Você corrigiu a propriedade CSS. Agora o navegador entende que deve aplicar a cor de fundo ao cartão.",
+  error:"Verifique a escrita da propriedade background e mantenha o valor #c4f46b."
  },
  {
-  instruction:"O seletor está procurando um ID que não existe. Faça o JavaScript encontrar o elemento correto e trocar o texto para “JavaScript funcionando!”.",
-  starter:'<!doctype html>\n<html lang="pt-BR">\n<body>\n  <p id="mensagem">Texto antigo</p>\n  <script>\n    document.querySelector("#mensagen").textContent = "JavaScript funcionando!";\n  </script>\n</body>\n</html>',
-  checks:[{test:/querySelector\(["']#mensagem["']\)/,message:"Use o seletor #mensagem, sem erro de digitação."},{test:/JavaScript funcionando!/i,message:"Mantenha o texto “JavaScript funcionando!” no código."}],
-  success:"Funcionou! Você corrigiu o seletor e o JavaScript consegue atualizar o conteúdo da página."
+  language:"JavaScript",level:"Praticando lógica · 15 minutos",title:"Faça o botão atualizar uma mensagem",
+  context:"Imagine um formulário de contato. Quando a pessoa clica em um botão, a página precisa mostrar uma confirmação. O HTML já tem o botão e a mensagem; o JavaScript está procurando o elemento errado.",
+  objective:"Ao clicar no botão “Enviar”, o texto deve mudar de “Aguardando envio...” para “Mensagem enviada com sucesso!”.",
+  explanation:"JavaScript adiciona comportamento. document.querySelector() procura um elemento usando um seletor CSS. Um # antes do nome indica um id. addEventListener(\"click\", ...) espera o clique no botão. textContent altera o texto que aparece dentro de um elemento.",
+  steps:["Localize o parágrafo que tem id=\"status\". Ele receberá a mensagem.","No JavaScript, procure a linha document.querySelector(...).","O seletor precisa ser #status, pois o id do parágrafo é status. Corrija o nome escrito errado.","Confira se o código escuta o clique do botão e altera textContent.","Clique em “Ver resultado” e depois clique no botão dentro da prévia.","Use “Conferir minha solução” para validar o seletor."],
+  starter:'<!doctype html>\n<html lang="pt-BR">\n<body>\n  <button id="enviar">Enviar</button>\n  <p id="status">Aguardando envio...</p>\n  <script>\n    const mensagem = document.querySelector("#stats");\n    const botao = document.querySelector("#enviar");\n    botao.addEventListener("click", () => {\n      mensagem.textContent = "Mensagem enviada com sucesso!";\n    });\n  </script>\n</body>\n</html>',
+  hints:["O valor do id no HTML é status. O seletor CSS para localizar esse id começa com #.","Troque #stats por #status. Não precisa alterar o restante do código."],
+  solution:'const mensagem = document.querySelector("#status");',
+  validate:code=>/id\s*=\s*["']status["']/i.test(code)&&/querySelector\(\s*["']#status["']\s*\)/i.test(code)&&/addEventListener\(\s*["']click["']/i.test(code)&&/textContent\s*=\s*["']Mensagem enviada com sucesso!["']/i.test(code),
+  success:"Você conectou o botão ao parágrafo. O JavaScript encontrou o elemento pelo id e alterou a mensagem após o clique.",
+  error:"Revise a ligação entre HTML e JavaScript: o id do parágrafo é status, o seletor deve ser #status e a alteração acontece no evento click."
  }
 ];
 const exerciseSelect=document.getElementById("exercise-select");
 const codeEditor=document.getElementById("code-editor");
-const exerciseInstructions=document.getElementById("exercise-instructions");
+const activityGuide=document.getElementById("activity-guide");
+const editorLanguage=document.getElementById("editor-language");
 const exerciseFeedback=document.getElementById("exercise-feedback");
 const preview=document.getElementById("code-preview");
-function loadExercise(){
+function escapeActivityText(value){return value.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;");}
+function renderActivity(){
  const exercise=exercises[Number(exerciseSelect.value)];
+ editorLanguage.textContent=exercise.language;
+ const steps=exercise.steps.map(step=>"<li>"+step+"</li>").join("");
+ activityGuide.innerHTML=
+  '<article class="activity-brief"><div class="activity-topline"><span class="activity-tag">'+exercise.level+'</span><span class="eyebrow">ATIVIDADE '+String(Number(exerciseSelect.value)+1).padStart(2,"0")+'/03</span></div><h3>'+exercise.title+'</h3><p>'+exercise.context+'</p><div class="activity-goal"><strong>O que você precisa alcançar</strong><br>'+exercise.objective+'</div></article>'+
+  '<article class="learning-note"><span class="eyebrow">ANTES DE COMEÇAR</span><h3>Entenda o conceito</h3><p>'+exercise.explanation+'</p></article>'+
+  '<article class="activity-steps"><span class="eyebrow">PASSO A PASSO</span><h3>Como resolver</h3><ol>'+steps+'</ol></article>'+
+  '<article class="hint-box"><details><summary>Preciso de uma dica</summary><p>'+exercise.hints[0]+'</p></details><details class="solution-details"><summary>Quero uma segunda dica</summary><p>'+exercise.hints[1]+'</p></details><details class="solution-details"><summary>Ver trecho corrigido (tente antes!)</summary><pre><code>'+escapeActivityText(exercise.solution)+'</code></pre></details></article>';
  codeEditor.value=exercise.starter;
- exerciseInstructions.textContent=exercise.instruction;
- exerciseFeedback.textContent="Faça a correção e clique em “Verificar resposta”.";
+ exerciseFeedback.textContent="Leia a explicação, siga as etapas e experimente. Errar faz parte do aprendizado.";
  exerciseFeedback.className="exercise-feedback";
- runCode();
+ runActivityCode();
 }
-function runCode(){
- preview.srcdoc=codeEditor.value;
-}
-function checkExercise(){
+function runActivityCode(){preview.srcdoc=codeEditor.value;}
+function checkActivity(){
  const exercise=exercises[Number(exerciseSelect.value)];
- const code=codeEditor.value;
- const failed=exercise.checks.find(check=>{
-  const matched=check.test.test(code);
-  return check.invert ? matched : !matched;
- });
- if(failed){
-  exerciseFeedback.textContent="Ainda não está certo. "+failed.message;
-  exerciseFeedback.className="exercise-feedback error";
- }else{
-  exerciseFeedback.textContent=exercise.success;
+ if(exercise.validate(codeEditor.value)){
+  exerciseFeedback.textContent="✓ Muito bem! "+exercise.success;
   exerciseFeedback.className="exercise-feedback success";
+ }else{
+  exerciseFeedback.textContent="Vamos por partes. "+exercise.error;
+  exerciseFeedback.className="exercise-feedback error";
  }
 }
-exerciseSelect.addEventListener("change",loadExercise);
-document.getElementById("reset-code").addEventListener("click",loadExercise);
-document.getElementById("run-code").addEventListener("click",runCode);
-document.getElementById("check-code").addEventListener("click",checkExercise);
-loadExercise();
+exerciseSelect.addEventListener("change",renderActivity);
+document.getElementById("reset-code").addEventListener("click",renderActivity);
+document.getElementById("run-code").addEventListener("click",runActivityCode);
+document.getElementById("check-code").addEventListener("click",checkActivity);
+renderActivity();

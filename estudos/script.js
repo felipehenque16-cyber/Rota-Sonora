@@ -404,21 +404,20 @@ function answerQuiz(choice){
  quizNext.disabled=false;
 }
 quizNext.addEventListener("click",()=>{
+ if(quizNext.dataset.restart==="true"){
+  quizNext.dataset.restart="false";
+  quizIndex=0;quizScore=0;renderQuiz();
+  return;
+ }
  if(!quizAnswered)return;
  if(quizIndex<quizQuestions.length-1){quizIndex++;renderQuiz();}
  else{
-  quizArea.innerHTML='<h4 id="quiz-question">Você terminou o quiz!</h4><p>Seu resultado: '+quizScore+' de '+quizQuestions.length+' acertos.</p><p>'+ (quizScore===quizQuestions.length?"Excelente! Você dominou esta rodada.": "Muito bom! Revise as explicações e tente novamente para memorizar ainda mais.")+'</p>';
+  quizArea.innerHTML='<h4 id="quiz-question">Você terminou o quiz!</h4><p>Seu resultado: '+quizScore+' de '+quizQuestions.length+' acertos.</p><p>'+(quizScore===quizQuestions.length?"Excelente! Você dominou esta rodada.":"Muito bom! Revise as explicações e tente novamente para memorizar ainda mais.")+'</p>';
   quizCounter.textContent="Rodada concluída";
   quizFeedback.textContent="Quer praticar mais uma vez? Reinicie o quiz.";
   quizNext.textContent="Jogar novamente";
   quizNext.disabled=false;
   quizNext.dataset.restart="true";
- }
-});
-quizNext.addEventListener("click",()=>{
- if(quizNext.dataset.restart==="true"){
-  quizNext.dataset.restart="false";
-  quizIndex=0;quizScore=0;renderQuiz();
  }
 });
 renderQuiz();

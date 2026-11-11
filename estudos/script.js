@@ -182,3 +182,61 @@ completeButton.addEventListener("click",()=>{
  renderLesson();
 });
 renderLesson();
+
+// Laboratório de código: exercícios com correção e prévia isolada.
+const exercises = [
+ {
+  instruction:"O título não foi fechado. Complete a tag para organizar corretamente a página.",
+  starter:'<!doctype html>\n<html lang="pt-BR">\n<body>\n  <h1>Minha primeira página\n  <p>Estou aprendendo HTML.</p>\n</body>\n</html>',
+  checks:[{test:/<h1>[^<]*<\\/h1>/i,message:"Feche a tag h1 com </h1>."}],
+  success:"Boa! Você corrigiu a estrutura do HTML. O título agora está fechado corretamente."
+ },
+ {
+  instruction:"O nome da propriedade CSS está escrito errado. Corrija para que o cartão fique verde.",
+  starter:'<!doctype html>\n<html lang="pt-BR">\n<head>\n<style>\n.card {\n  backgroud: #c4f46b;\n  color: #172010;\n  padding: 24px;\n  border-radius: 12px;\n}\n</style>\n</head>\n<body>\n  <div class="card">Meu primeiro cartão</div>\n</body>\n</html>',
+  checks:[{test:/background\\s*:\\s*#c4f46b/i,message:"Confira a propriedade background e o valor #c4f46b."},{test:/backgroud\\s*:/i,invert:true,message:"Ainda existe a palavra backgroud escrita incorretamente."}],
+  success:"Muito bem! Você encontrou e corrigiu o erro de CSS. O cartão já pode receber a cor de fundo."
+ },
+ {
+  instruction:"O seletor está procurando um ID que não existe. Faça o JavaScript encontrar o elemento correto e trocar o texto para “JavaScript funcionando!”.",
+  starter:'<!doctype html>\n<html lang="pt-BR">\n<body>\n  <p id="mensagem">Texto antigo</p>\n  <script>\n    document.querySelector("#mensagen").textContent = "JavaScript funcionando!";\n  </script>\n</body>\n</html>',
+  checks:[{test:/querySelector\\(["']#mensagem["']\\)/.test.bind(/querySelector\\(["']#mensagem["']\\)/),message:"Use o seletor #mensagem, sem erro de digitação."},{test:/JavaScript funcionando!/i,message:"Mantenha o texto “JavaScript funcionando!” no código."}],
+  success:"Funcionou! Você corrigiu o seletor e o JavaScript consegue atualizar o conteúdo da página."
+ }
+];
+const exerciseSelect=document.getElementById("exercise-select");
+const codeEditor=document.getElementById("code-editor");
+const exerciseInstructions=document.getElementById("exercise-instructions");
+const exerciseFeedback=document.getElementById("exercise-feedback");
+const preview=document.getElementById("code-preview");
+function loadExercise(){
+ const exercise=exercises[Number(exerciseSelect.value)];
+ codeEditor.value=exercise.starter;
+ exerciseInstructions.textContent=exercise.instruction;
+ exerciseFeedback.textContent="Faça a correção e clique em “Verificar resposta”.";
+ exerciseFeedback.className="exercise-feedback";
+ runCode();
+}
+function runCode(){
+ preview.srcdoc=codeEditor.value;
+}
+function checkExercise(){
+ const exercise=exercises[Number(exerciseSelect.value)];
+ const code=codeEditor.value;
+ const failed=exercise.checks.find(check=>{
+  const matched=check.test.test(code);
+  return check.invert ? matched : !matched;
+ });
+ if(failed){
+  exerciseFeedback.textContent="Ainda não está certo. "+failed.message;
+  exerciseFeedback.className="exercise-feedback error";
+ }else{
+  exerciseFeedback.textContent=exercise.success;
+  exerciseFeedback.className="exercise-feedback success";
+ }
+}
+exerciseSelect.addEventListener("change",loadExercise);
+document.getElementById("reset-code").addEventListener("click",loadExercise);
+document.getElementById("run-code").addEventListener("click",runCode);
+document.getElementById("check-code").addEventListener("click",checkExercise);
+loadExercise();

@@ -262,3 +262,163 @@ document.getElementById("reset-code").addEventListener("click",renderActivity);
 document.getElementById("run-code").addEventListener("click",runActivityCode);
 document.getElementById("check-code").addEventListener("click",checkActivity);
 renderActivity();
+
+
+// Jogos de memorização: pares de conceitos e quiz de revisão.
+const memoryPairs=[
+ ["HTML","Estrutura do conteúdo"],
+ ["CSS","Aparência e estilo"],
+ ["JavaScript","Interação e comportamento"],
+ ["API","Comunicação entre sistemas"]
+];
+const memoryGrid=document.getElementById("memory-grid");
+const memoryMoves=document.getElementById("memory-moves");
+const memoryPairsCount=document.getElementById("memory-pairs");
+const memoryFeedback=document.getElementById("memory-feedback");
+let memoryDeck=[],memorySelected=[],memoryMovesValue=0,memoryFound=0,memoryLocked=false;
+function shuffleDeck(items){
+ const deck=[...items];
+ for(let i=deck.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[deck[i],deck[j]]=[deck[j],deck[i]];}
+ return deck;
+}
+function resetMemoryGame(){
+ memoryDeck=shuffleDeck(memoryPairs.flatMap((pair,index)=>[
+  {pair:index,label:pair[0],kind:"concept"},
+  {pair:index,label:pair[1],kind:"meaning"}
+ ]));
+ memorySelected=[];memoryMovesValue=0;memoryFound=0;memoryLocked=false;
+ memoryMoves.textContent="Jogadas: 0";
+ memoryPairsCount.textContent="Pares: 0 de 4";
+ memoryFeedback.textContent="Escolha duas cartas para começar.";
+ memoryFeedback.className="game-feedback";
+ renderMemoryCards();
+}
+function renderMemoryCards(){
+ memoryGrid.innerHTML="";
+ memoryDeck.forEach((card,index)=>{
+  const button=document.createElement("button");
+  button.type="button";
+  button.className="memory-card";
+  button.dataset.index=String(index);
+  button.setAttribute("aria-label","Carta fechada");
+  button.innerHTML='<span class="card-hidden">?</span>';
+  button.addEventListener("click",()=>revealMemoryCard(index));
+  memoryGrid.appendChild(button);
+ });
+}
+function revealMemoryCard(index){
+ if(memoryLocked||memorySelected.includes(index))return;
+ const card=memoryDeck[index];
+ const button=memoryGrid.querySelector('[data-index="'+index+'"]');
+ if(button.disabled)return;
+ button.classList.add("revealed");
+ button.textContent=card.label;
+ button.setAttribute("aria-label",card.label);
+ memorySelected.push(index);
+ if(memorySelected.length!==2)return;
+ memoryMovesValue++;
+ memoryMoves.textContent="Jogadas: "+memoryMovesValue;
+ const [first,second]=memorySelected;
+ if(memoryDeck[first].pair===memoryDeck[second].pair&&memoryDeck[first].kind!==memoryDeck[second].kind){
+  [first,second].forEach(i=>{
+   const found=memoryGrid.querySelector('[data-index="'+i+'"]');
+   found.classList.remove("revealed");
+   found.classList.add("matched");
+   found.disabled=true;
+  });
+  memoryFound++;
+  memoryPairsCount.textContent="Pares: "+memoryFound+" de 4";
+  memorySelected=[];
+  if(memoryFound===4){
+   memoryFeedback.textContent="Parabéns! Você encontrou todos os pares em "+memoryMovesValue+" jogadas. Repetir ajuda a fixar os conceitos.";
+   memoryFeedback.className="game-feedback success";
+  }else{
+   memoryFeedback.textContent="Acertou! "+memoryDeck[first].label+" combina com sua definição.";
+   memoryFeedback.className="game-feedback success";
+  }
+ }else{
+  memoryLocked=true;
+  memoryFeedback.textContent="Essas cartas não formam um par. Tente lembrar onde cada conceito está.";
+  memoryFeedback.className="game-feedback";
+  window.setTimeout(()=>{
+   [first,second].forEach(i=>{
+    const hidden=memoryGrid.querySelector('[data-index="'+i+'"]');
+    if(hidden&&!hidden.disabled){
+     hidden.classList.remove("revealed");
+     hidden.innerHTML='<span class="card-hidden">?</span>';
+     hidden.setAttribute("aria-label","Carta fechada");
+    }
+   });
+   memorySelected=[];
+   memoryLocked=false;
+  },850);
+ }
+}
+document.getElementById("memory-reset").addEventListener("click",resetMemoryGame);
+resetMemoryGame();
+
+const quizQuestions=[
+ {q:"Qual linguagem define a estrutura de uma página?",options:["CSS","HTML","JavaScript"],correct:1,why:"HTML organiza o conteúdo: títulos, parágrafos, imagens, links e outras partes da página."},
+ {q:"Qual propriedade CSS altera a cor do texto?",options:["color","background","padding"],correct:0,why:"color define a cor do texto. background controla o fundo do elemento."},
+ {q:"O que o JavaScript permite fazer no front-end?",options:["Somente criar tabelas","Dar interatividade à página","Substituir o HTML"],correct:1,why:"JavaScript responde a eventos, valida formulários, altera conteúdo e controla interações."},
+ {q:"Para que serve o display: flex?",options:["Criar banco de dados","Organizar elementos em linha ou coluna","Conectar ao Google"],correct:1,why:"Flexbox é um sistema de layout para alinhar e distribuir elementos em uma dimensão."},
+ {q:"O que significa API?",options:["Um tipo de imagem","Uma forma de comunicação entre sistemas","Uma propriedade CSS"],correct:1,why:"Uma API define como sistemas podem trocar informações e solicitar operações."}
+];
+let quizIndex=0,quizScore=0,quizAnswered=false;
+const quizArea=document.getElementById("quiz-area");
+const quizCounter=document.getElementById("quiz-counter");
+const quizScoreLabel=document.getElementById("quiz-score");
+const quizFeedback=document.getElementById("quiz-feedback");
+const quizNext=document.getElementById("quiz-next");
+function renderQuiz(){
+ const item=quizQuestions[quizIndex];
+ quizCounter.textContent="Pergunta "+(quizIndex+1)+" de "+quizQuestions.length;
+ quizScoreLabel.textContent="Acertos: "+quizScore;
+ quizArea.innerHTML='<h4 id="quiz-question">'+item.q+'</h4><div class="quiz-options">'+item.options.map((option,index)=>'<button class="quiz-option" type="button" data-option="'+index+'">'+option+'</button>').join("")+'</div>';
+ quizArea.querySelectorAll(".quiz-option").forEach(button=>button.addEventListener("click",()=>answerQuiz(Number(button.dataset.option))));
+ quizFeedback.textContent="Escolha uma alternativa para responder.";
+ quizFeedback.className="game-feedback";
+ quizNext.disabled=true;
+ quizNext.textContent=quizIndex===quizQuestions.length-1?"Ver resultado":"Próxima pergunta";
+ quizAnswered=false;
+}
+function answerQuiz(choice){
+ if(quizAnswered)return;
+ quizAnswered=true;
+ const item=quizQuestions[quizIndex];
+ const buttons=[...quizArea.querySelectorAll(".quiz-option")];
+ buttons.forEach((button,index)=>{
+  button.disabled=true;
+  if(index===item.correct)button.classList.add("correct");
+  else if(index===choice)button.classList.add("wrong");
+ });
+ if(choice===item.correct){
+  quizScore++;
+  quizFeedback.textContent="Acertou! "+item.why;
+  quizFeedback.className="game-feedback success";
+ }else{
+  quizFeedback.textContent="Ainda não. "+item.why;
+  quizFeedback.className="game-feedback error";
+ }
+ quizScoreLabel.textContent="Acertos: "+quizScore;
+ quizNext.disabled=false;
+}
+quizNext.addEventListener("click",()=>{
+ if(!quizAnswered)return;
+ if(quizIndex<quizQuestions.length-1){quizIndex++;renderQuiz();}
+ else{
+  quizArea.innerHTML='<h4 id="quiz-question">Você terminou o quiz!</h4><p>Seu resultado: '+quizScore+' de '+quizQuestions.length+' acertos.</p><p>'+ (quizScore===quizQuestions.length?"Excelente! Você dominou esta rodada.": "Muito bom! Revise as explicações e tente novamente para memorizar ainda mais.")+'</p>';
+  quizCounter.textContent="Rodada concluída";
+  quizFeedback.textContent="Quer praticar mais uma vez? Reinicie o quiz.";
+  quizNext.textContent="Jogar novamente";
+  quizNext.disabled=false;
+  quizNext.dataset.restart="true";
+ }
+});
+quizNext.addEventListener("click",()=>{
+ if(quizNext.dataset.restart==="true"){
+  quizNext.dataset.restart="false";
+  quizIndex=0;quizScore=0;renderQuiz();
+ }
+});
+renderQuiz();

@@ -28,3 +28,33 @@
 .preview-heading{margin:18px 0 8px;color:var(--muted);font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase}
 #code-preview{display:block;width:100%;height:190px;border:1px solid var(--line);border-radius:9px;background:#fff}
 @media(max-width:520px){.playground{padding:16px}.editor-actions{align-items:stretch;flex-direction:column}.editor-actions>div{display:grid;grid-template-columns:1fr 1fr}.editor-actions button{padding-inline:8px}}
+
+/* Prática guiada: explicação, etapas e editor */
+.playground{padding:clamp(18px,3vw,30px)}
+.playground-heading h2{margin:10px 0;font:800 clamp(24px,3vw,30px) Manrope,sans-serif}
+.playground-toolbar{margin:24px 0 16px}
+#activity-guide{display:grid;gap:14px}
+.activity-brief,.learning-note,.activity-steps,.hint-box,.editor-panel{padding:18px;border:1px solid var(--line);border-radius:11px;background:rgba(11,17,13,.52)}
+.activity-topline{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.activity-tag,.editor-language{padding:5px 9px;border:1px solid rgba(196,244,107,.25);border-radius:20px;color:var(--accent);font-size:10px;font-weight:700}
+.activity-brief h3,.learning-note h3,.activity-steps h3,.editor-title-row h3{margin:5px 0 9px;font:700 17px Manrope,sans-serif}
+.activity-brief p,.learning-note p,.activity-steps p,.activity-steps li,.hint-box p{color:var(--muted);font-size:12px;line-height:1.8}
+.activity-goal{margin-top:12px;padding:11px 13px;border-radius:8px;background:rgba(196,244,107,.07);color:#e4eddc;font-size:12px;line-height:1.7}
+.learning-note{border-left:3px solid var(--accent)}
+.activity-steps ol{display:grid;gap:9px;padding-left:20px}
+.activity-steps li::marker{color:var(--accent);font-weight:700}
+.hint-box details{color:var(--text);font-size:12px}
+.hint-box summary{cursor:pointer;color:var(--accent);font-weight:700}
+.hint-box p{margin-bottom:0}
+.solution-details{margin-top:10px}
+.solution-details summary{color:var(--muted)}
+.solution-details pre{margin-top:10px;border-radius:8px;background:var(--code)}
+.editor-panel{margin-top:18px;background:rgba(25,35,28,.72)}
+.editor-title-row{display:flex;align-items:center;justify-content:space-between}
+.editor-title-row h3{font-size:20px}
+.editor-help{color:var(--muted);font-size:12px;line-height:1.7}
+#code-editor{min-height:270px}
+.exercise-feedback{padding:12px 14px;border:1px solid var(--line);border-radius:8px;background:rgba(11,17,13,.6)}
+.exercise-feedback.success{border-color:rgba(196,244,107,.4);background:rgba(196,244,107,.07)}
+.exercise-feedback.error{border-color:rgba(255,180,168,.35);background:rgba(255,180,168,.05)}
+@media(max-width:520px){.activity-brief,.learning-note,.activity-steps,.hint-box,.editor-panel{padding:14px}.activity-topline{align-items:flex-start;flex-direction:column}}

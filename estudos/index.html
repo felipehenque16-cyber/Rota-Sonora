@@ -52,33 +52,19 @@
         <button class="secondary-button" id="next-button">Próxima aula →</button>
       </div>
       <section class="playground" aria-labelledby="playground-title">
-        <div class="playground-heading">
-          <span class="eyebrow">MÃO NA MASSA</span>
-          <h2 id="playground-title">Laboratório de código<span>.</span></h2>
-          <p>Digite, corrija os erros e execute seu código aqui mesmo. Não precisa instalar nada.</p>
+        <div class="playground-heading"><span class="eyebrow">APRENDER FAZENDO</span><h2 id="playground-title">Prática guiada<span>.</span></h2><p>Entenda o conceito, acompanhe as etapas e escreva a solução. Sem precisar adivinhar.</p></div>
+        <div class="playground-toolbar"><label for="exercise-select">Escolha sua atividade</label><select id="exercise-select"><option value="0">01 · Organizando uma página com HTML</option><option value="1">02 · Corrigindo o visual com CSS</option><option value="2">03 · Fazendo um botão funcionar com JavaScript</option></select></div>
+        <div id="activity-guide" aria-live="polite"></div>
+        <div class="editor-panel">
+          <div class="editor-title-row"><div><span class="eyebrow">SUA ÁREA DE CÓDIGO</span><h3>Editor</h3></div><span class="editor-language" id="editor-language">HTML</span></div>
+          <p class="editor-help">Clique dentro da área abaixo, edite o código e depois execute para observar o resultado.</p>
+          <label class="editor-label" for="code-editor">Escreva ou corrija o código</label>
+          <textarea id="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Editor de código"></textarea>
+          <div class="editor-actions"><button class="secondary-button" id="reset-code" type="button">Recomeçar atividade</button><div><button class="secondary-button" id="run-code" type="button">▶ Ver resultado</button><button class="primary-button" id="check-code" type="button">Conferir minha solução</button></div></div>
+          <p class="exercise-feedback" id="exercise-feedback" aria-live="polite">Quando terminar, confira sua solução. Se errar, tudo bem: a explicação vai ajudar.</p>
+          <div class="preview-heading">O que seu código produziu</div><iframe id="code-preview" title="Prévia do código" sandbox="allow-scripts"></iframe>
+          <p class="editor-footnote">A prévia roda isolada nesta página. Não coloque senhas ou dados pessoais no editor.</p>
         </div>
-        <div class="playground-toolbar">
-          <label for="exercise-select">Escolha um exercício</label>
-          <select id="exercise-select">
-            <option value="0">01 · Corrija o HTML</option>
-            <option value="1">02 · Conserte o CSS</option>
-            <option value="2">03 · Faça o JavaScript funcionar</option>
-          </select>
-        </div>
-        <div class="exercise-instructions" id="exercise-instructions">O título não foi fechado. Complete a tag para organizar corretamente a página.</div>
-        <label class="editor-label" for="code-editor">Seu código</label>
-        <textarea id="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Editor de código"></textarea>
-        <div class="editor-actions">
-          <button class="secondary-button" id="reset-code" type="button">Restaurar exercício</button>
-          <div>
-            <button class="secondary-button" id="run-code" type="button">▶ Executar</button>
-            <button class="primary-button" id="check-code" type="button">Verificar resposta</button>
-          </div>
-        </div>
-        <p class="exercise-feedback" id="exercise-feedback" aria-live="polite">Dica: faça a correção e clique em “Verificar resposta”.</p>
-        <div class="preview-heading">Resultado da execução</div>
-        <iframe id="code-preview" title="Prévia do código" sandbox="allow-scripts"></iframe>
-        <p class="editor-footnote">O código é executado em uma prévia isolada nesta página. Evite inserir informações pessoais ou senhas.</p>
       </section>
       <p class="footer-note">Uma plataforma para aprender programação do básico à prática. Vá no seu ritmo.</p>
     </section>

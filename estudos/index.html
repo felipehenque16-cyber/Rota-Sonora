@@ -66,6 +66,23 @@
           <p class="editor-footnote">A prévia roda isolada nesta página. Não coloque senhas ou dados pessoais no editor.</p>
         </div>
       </section>
+      <section class="memory-games" aria-labelledby="memory-games-title">
+        <div class="playground-heading"><span class="eyebrow">APRENDER BRINCANDO</span><h2 id="memory-games-title">Jogos de memorização<span>.</span></h2><p>Reforce os conceitos das aulas com desafios curtos. Jogue quantas vezes quiser.</p></div>
+        <div class="game-block">
+          <div class="game-heading"><div><span class="eyebrow">JOGO 01</span><h3>Memória dos conceitos</h3><p>Encontre os pares: cada conceito combina com sua função.</p></div><span class="game-icon">▦</span></div>
+          <div class="game-status"><span id="memory-moves">Jogadas: 0</span><span id="memory-pairs">Pares: 0 de 4</span></div>
+          <div class="memory-grid" id="memory-grid" aria-label="Jogo de encontrar pares"></div>
+          <p class="game-feedback" id="memory-feedback" aria-live="polite">Escolha duas cartas para começar.</p>
+          <button class="secondary-button" id="memory-reset" type="button">Embaralhar novamente</button>
+        </div>
+        <div class="game-block">
+          <div class="game-heading"><div><span class="eyebrow">JOGO 02</span><h3>Quiz relâmpago</h3><p>Responda perguntas rápidas e descubra o quanto você já memorizou.</p></div><span class="game-icon">?</span></div>
+          <div class="quiz-status"><span id="quiz-counter">Pergunta 1 de 5</span><span id="quiz-score">Acertos: 0</span></div>
+          <div id="quiz-area"></div>
+          <p class="game-feedback" id="quiz-feedback" aria-live="polite">Escolha uma alternativa para responder.</p>
+          <button class="primary-button" id="quiz-next" type="button" disabled>Próxima pergunta</button>
+        </div>
+      </section>
       <p class="footer-note">Uma plataforma para aprender programação do básico à prática. Vá no seu ritmo.</p>
     </section>
   </main>

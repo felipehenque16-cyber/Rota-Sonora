@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101812">
+  <meta name="description" content="Aprenda programação usando o projeto Trilhê como exemplo.">
+  <title>Trilhê Lab — Aprenda construindo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <script src="./script.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="../index.html"><span class="brand-icon">t.</span> trilhê<span class="dot">.</span><span class="lab-label">LAB</span></a>
+    <a class="back-link" href="../index.html">← Voltar ao projeto</a>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar">
+      <p class="side-kicker">SUA JORNADA</p>
+      <div class="progress-card">
+        <div class="progress-line"><span id="progress-fill"></span></div>
+        <p><strong id="progress-count">0 de 6</strong> aulas concluídas</p>
+      </div>
+      <nav class="lesson-nav" aria-label="Aulas">
+        <button class="nav-item active" data-lesson="0"><span>01</span> Como o site funciona</button>
+        <button class="nav-item" data-lesson="1"><span>02</span> HTML: estrutura</button>
+        <button class="nav-item" data-lesson="2"><span>03</span> CSS: aparência</button>
+        <button class="nav-item" data-lesson="3"><span>04</span> JavaScript: interação</button>
+        <button class="nav-item" data-lesson="4"><span>05</span> Formulários e APIs</button>
+        <button class="nav-item" data-lesson="5"><span>06</span> Próximo passo: OAuth</button>
+      </nav>
+      <div class="side-tip"><span>✳</span><p><strong>Dica de estudo</strong><br>Leia, teste o exemplo e depois tente explicar com suas próprias palavras.</p></div>
+    </aside>
+
+    <section class="lesson-area">
+      <div class="welcome-row"><span class="eyebrow">APRENDER NA PRÁTICA</span><span class="level">NÍVEL INICIANTE</span></div>
+      <div id="lesson-content" aria-live="polite"></div>
+      <div class="lesson-actions">
+        <button class="secondary-button" id="prev-button" disabled>← Aula anterior</button>
+        <button class="primary-button" id="complete-button">Marcar aula como concluída</button>
+        <button class="secondary-button" id="next-button">Próxima aula →</button>
+      </div>
+      <p class="footer-note">Feito para aprender programação construindo o Trilhê. Vá no seu ritmo.</p>
+    </section>
+  </main>
+</body>
+</html>
